@@ -29,7 +29,7 @@ export default function MiniSearch({ onSearch }: MiniSearchProps) {
 		<div className="w-full flex flex-col gap-2 bg-white/10 border border-gray-light dark:border-gray-light-opacity/20 backdrop-blur-sm rounded-xl px-2 py-4">
 			<textarea
 				id="mini-search-input"
-				className="w-full font-archivo overflow-y-auto max-h-72 focus:outline-none resize-none"
+				className="w-full font-archivo overflow-y-auto scrollbar max-h-72 focus:outline-none resize-none"
 				value={search}
 				onChange={handleTextAreaChange}
 			/>

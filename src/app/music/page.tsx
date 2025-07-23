@@ -38,7 +38,7 @@ export default function Music() {
 						</div>
 					</div>
 					<div className="flex flex-col h-[calc(100vh-160px)]">
-						<div className="grow overflow-y-auto">
+						<div className="grow overflow-y-auto scrollbar">
 							<BubbleChat data={data}/>
 						</div>
 						<div className="w-full p-4 shrink-0">
@@ -66,7 +66,7 @@ export default function Music() {
 								</button>
 							</div>
 							<div className="w-full grow px-4 py-2 overflow-hidden">
-								<div className="flex flex-col gap-2 overflow-y-auto h-[calc(100vh-160px)]">
+								<div className="flex flex-col gap-2 overflow-y-auto scrollbar h-[calc(100vh-160px)]">
 									{
 										songs.map((song) => {
 											return (

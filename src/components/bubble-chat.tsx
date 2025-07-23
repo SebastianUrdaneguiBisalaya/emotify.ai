@@ -20,7 +20,7 @@ export default function BubbleChat({
 }: BubbleChatProps) {
 	return (
 		<div 
-			className="w-full flex flex-col gap-3 p-4 overflow-y-auto"
+			className="w-full flex flex-col gap-3 p-4"
 		>
 			{
 				data && data?.length > 0 && (
