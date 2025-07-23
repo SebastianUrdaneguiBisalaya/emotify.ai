@@ -34,6 +34,13 @@ export default function MiniSearch({ onSearch }: MiniSearchProps) {
 				onChange={handleTextAreaChange}
 			/>
 			<div className="w-full flex flex-row items-center justify-end gap-2">
+				<button
+					className="cursor-pointer rounded-full p-2 bg-green"
+				>
+					<span className="w-fit h-fit flex items-center">
+						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m4.588 14.432a.62.62 0 0 1-.861.2c-2.354-1.434-5.3-1.757-8.794-.968a.618.618 0 0 1-.275-1.206c3.812-.872 7.085-.5 9.714 1.111a.626.626 0 0 1 .217.857zm1.218-2.724a.79.79 0 0 1-1.075.263A13.18 13.18 0 0 0 6.767 12.8a.773.773 0 1 1-.442-1.482a14.62 14.62 0 0 1 11.243 1.327a.77.77 0 0 1 .239 1.063zm.108-2.843C14.688 8.953 9.371 8.774 6.289 9.706a.937.937 0 0 1-.55-1.792c3.537-1.075 9.415-.861 13.119 1.338a.93.93 0 0 1 .322 1.278a.907.907 0 0 1-1.266.334z"/></svg>
+					</span>
+				</button>
 				{
 					showAudioRecordIcon && (
 						<button
