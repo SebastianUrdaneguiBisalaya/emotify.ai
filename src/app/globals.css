@@ -2,27 +2,44 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #121212;
+	--green: #1ed760;
+	--gray: #878787;
+	--gray-light: #BDBDBD;
+	--gray-light-opacity: #D9D9D9;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-fira-code: var(--font-fira-code);
-  --font-work-sans: var(--font-work-sans);
+	--color-green: var(--green);
+	--color-gray: var(--gray);
+	--color-gray-light: var(--gray-light);
+	--color-gray-light-opacity: var(--gray-light-opacity);
+  --font-montserrat: var(--font-montserrat);
+  --font-archivo: var(--font-archivo);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #121212;
+    --foreground: #ffffff;
   }
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-	display: grid;
-	place-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
