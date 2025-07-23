@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@midudev/tailwind-animations";
 
 :root {
   --background: #ffffff;
@@ -34,6 +35,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
+	overflow-x: hidden;
 }
 
 .scrollbar-hide {

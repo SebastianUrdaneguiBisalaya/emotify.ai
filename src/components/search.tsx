@@ -15,7 +15,7 @@ export default function Search() {
 	}, [search]);
 
 	return (
-		<div className="relative flex flex-row items-center justify-between gap-2 shadow-md shadow-green px-6 py-3 rounded-[28px] bg-gray-light-opacity backdrop-blur-sm max-w-2xl w-full min-h-fit max-h-96 h-full">
+		<div className="relative flex flex-row items-center justify-between gap-2 shadow-md shadow-green px-6 py-3 rounded-[28px] bg-white/10 border border-transparent dark:border-white backdrop-blur-sm max-w-2xl w-full min-h-fit max-h-96 h-full">
 			<div className="flex flex-row items-center gap-2 w-full">
 				<div className="absolute top-4 left-6 w-fit h-fit flex items-center justify-center">
 					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><g fill="none" stroke="#878787" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="m21 21l-4.34-4.34"/><circle cx="11" cy="11" r="8"/></g></svg>

@@ -29,10 +29,10 @@ export default function Home() {
 				</a>
 			</header>
 			
-			<main className="w-full h-full flex flex-col items-center gap-4 py-4">
+			<main className="w-full h-full flex flex-col items-center gap-8 py-4">
 				<MainTag />
 				<h1 className="font-montserrat font-bold text-center text-6xl text-black dark:text-white">Descubre la música que se adapta a tu <span className="text-green">estado de ánimo</span></h1>
-				<h2 className="font-archivo font-normal text-gray dark:text-gray-light text-xl text-center max-w-4xl w-full">En emotify.ai, escribe cómo te sientes o qué vas a hacer —ya sea trabajar, relajarte, pensar o celebrar— y deja que la IA elija las canciones perfectas para ti desde Spotify.</h2>
+				<h2 className="font-archivo font-normal text-gray dark:text-gray-light text-xl text-center max-w-4xl w-full">Escribe cómo te sientes o qué vas a hacer —ya sea trabajar, relajarte, pensar o celebrar— y deja que la IA elija las canciones perfectas para ti desde Spotify.</h2>
 				<Search />
 			</main>
 
