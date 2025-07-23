@@ -1,7 +1,9 @@
+import MiniSearch from "@/components/mini-search";
+
 export default function Music() {
 	return (
 		<div className="w-full min-h-screen h-full max-w-6xl p-4 mx-auto grid grid-cols-2 gap-4">
-			<div className="w-full h-full flex flex-col overflow-y-auto border border-gray-light dark:border-gray-light-opacity/20 rounded-[20px]">
+			<div className="w-full h-full flex flex-col overflow-y-auto border border-gray-light dark:border-gray-light-opacity/20 rounded-[20px] bg-background/30">
 				<div className="w-full h-full flex flex-col">
 					<div className="w-full h-fit flex flex-row items-center justify-between gap-2 px-4 py-2 border-b border-gray-light dark:border-gray-light-opacity/20">
 						<span className="font-archivo text-black dark:text-white text-sm px-4 py-2 bg-gray/20 rounded-lg">Chat</span>
@@ -10,13 +12,11 @@ export default function Music() {
 						</div>
 					</div>
 				</div>
-				<div className="w-full h-full flex flex-col min-h-fit max-h-72 p-4">
-					<div className="w-full h-full flex flex-col overflow-y-auto bg-white/10 border border-gray-light dark:border-gray-light-opacity/20 backdrop-blur-sm rounded-xl p-2">
-
-					</div>
+				<div className="w-full h-full flex flex-col justify-end min-h-fit max-h-72 p-4">
+					<MiniSearch />
 				</div>
 			</div>
-			<div className="w-full h-full flex flex-col overflow-y-auto border border-gray-light dark:border-gray-light-opacity/20 rounded-[20px]">
+			<div className="w-full h-full flex flex-col overflow-y-auto border border-gray-light dark:border-gray-light-opacity/20 rounded-[20px] bg-background/30">
 				<div className="w-full h-fit flex flex-row items-center justify-between gap-2 px-4 py-2 border-b border-gray-light dark:border-gray-light-opacity/20">
 					<span className="font-archivo text-black dark:text-white text-sm px-4 py-2 bg-gray/20 rounded-lg">Resultados</span>
 					<div className="w-fit h-fit flex items-center justify-center">
