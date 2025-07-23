@@ -50,9 +50,19 @@ export default function Music() {
 						<div className="w-full flex flex-col border border-gray-light dark:border-gray-light-opacity/20 rounded-[20px] bg-background/30">
 							<div className="w-full h-fit flex flex-row items-center justify-between gap-2 px-4 py-2 border-b border-gray-light dark:border-gray-light-opacity/20">
 								<span className="font-archivo text-black dark:text-white text-sm px-4 py-2 bg-gray/20 rounded-lg">Resultados</span>
-								<div className="w-fit h-fit flex items-center justify-center">
-									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M21 3v12.5a3.5 3.5 0 0 1-3.5 3.5a3.5 3.5 0 0 1-3.5-3.5a3.5 3.5 0 0 1 3.5-3.5c.54 0 1.05.12 1.5.34V6.47L9 8.6v8.9A3.5 3.5 0 0 1 5.5 21A3.5 3.5 0 0 1 2 17.5A3.5 3.5 0 0 1 5.5 14c.54 0 1.05.12 1.5.34V6z"/></svg>
-								</div>
+								<button
+									className="w-fit h-fit flex items-center justify-center bg-green rounded-full p-2 cursor-pointer"
+									type="button"
+								>
+									<span className="text-montserrat text-xs text-white flex flex-row items-center gap-0.5">
+										<span className="w-fit h-fit flex items-center justify-center">
+											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ffffff" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z"/></svg>
+										</span>
+										<span>
+											Playlist
+										</span>
+									</span>
+								</button>
 							</div>
 							<div className="w-full grow">
 
