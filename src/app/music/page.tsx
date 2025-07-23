@@ -4,7 +4,8 @@ import { useState } from "react";
 import MiniSearch from "@/components/mini-search";
 import Logo from "@/components/logo";
 import BubbleChat from "@/components/bubble-chat";
-import { data } from "@/constants/data";
+import CardSong from "@/components/card-song";
+import { data, songs } from "@/constants/data";
 
 export default function Music() {
 	const [showSearchInSpotify, setShowSearchInSpotify] = useState<boolean>(false);
@@ -64,8 +65,24 @@ export default function Music() {
 									</span>
 								</button>
 							</div>
-							<div className="w-full grow">
-
+							<div className="w-full grow px-4 py-2 overflow-hidden">
+								<div className="flex flex-col gap-2 overflow-y-auto h-[calc(100vh-160px)]">
+									{
+										songs.map((song) => {
+											return (
+												<CardSong
+													key={song.id}
+													id={song.id}
+													artist={song.artist}
+													title={song.title}
+													image={song.image}
+													duration={song.duration}
+													type={song.type}
+												/>
+											)
+										})
+									}
+								</div>
 							</div>
 						</div>
 					)
