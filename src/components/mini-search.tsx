@@ -17,18 +17,21 @@ export default function MiniSearch({ onSearch }: MiniSearchProps) {
 			setShowAudioRecordIcon(true);
 		}
 	}, [search]);
+
+	const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+		const textArea = event.target as HTMLTextAreaElement;
+		textArea.style.height = "auto";
+		const newHeight = Math.min(textArea.scrollHeight, 200);
+		textArea.style.height = `${newHeight}px`;
+		setSearch(textArea.value);
+	}
 	return (
-		<div className="w-full h-fit flex flex-col gap-2 bg-white/10 border border-gray-light dark:border-gray-light-opacity/20 backdrop-blur-sm rounded-xl px-2 py-4">
+		<div className="w-full flex flex-col gap-2 bg-white/10 border border-gray-light dark:border-gray-light-opacity/20 backdrop-blur-sm rounded-xl px-2 py-4">
 			<textarea
 				id="mini-search-input"
-				className="w-full font-archivo focus:outline-none resize-none"
+				className="w-full font-archivo overflow-y-auto max-h-72 focus:outline-none resize-none"
 				value={search}
-				onChange={(event) => {
-					const textArea = event.target as HTMLTextAreaElement;
-					textArea.style.height = "auto";
-					textArea.style.height = `${Math.min(textArea.scrollHeight, 200)}px`;
-					setSearch(textArea.value);
-				}}
+				onChange={handleTextAreaChange}
 			/>
 			<div className="w-full flex flex-row items-center justify-end gap-2">
 				{

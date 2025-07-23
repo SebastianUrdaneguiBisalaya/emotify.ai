@@ -35,7 +35,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
-	overflow-x: hidden;
+	overflow: hidden;
 }
 
 .scrollbar-hide {
