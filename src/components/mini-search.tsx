@@ -2,7 +2,11 @@
 
 import { useState, useEffect } from "react";
 
-export default function MiniSearch() {
+type MiniSearchProps = {
+	onSearch: () => void;
+}
+
+export default function MiniSearch({ onSearch }: MiniSearchProps) {
 	const [search, setSearch] = useState<string>("");
 	const [showAudioRecordIcon, setShowAudioRecordIcon] = useState<boolean>(true);
 	
@@ -40,6 +44,7 @@ export default function MiniSearch() {
 				}
 				<button
 					className="cursor-pointer bg-black rounded-full px-4 py-2"
+					onClick={onSearch}
 				>
 					<span className="font-archivo text-white">
 						Generar
