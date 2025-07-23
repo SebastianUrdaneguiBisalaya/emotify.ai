@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function Search() {
 	const [search, setSearch] = useState<string>("");
@@ -46,13 +47,14 @@ export default function Search() {
 					)
 				}
 				
-				<button
+				<Link
+					href="/music"
 					className="absolute bottom-4 right-6 cursor-pointer bg-black rounded-full px-4 py-2"
 				>
 					<span className="font-archivo text-white">
 						Generar
 					</span>
-				</button>
+				</Link>
 			</div>
 		</div>
 	)	
