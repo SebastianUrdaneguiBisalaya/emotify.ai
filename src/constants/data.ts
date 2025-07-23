@@ -74,6 +74,11 @@ export const data: Data[] = [
         artist: "The Beatles",
         title: "Hey Jude",
       },
+      {
+        id: "7",
+        artist: "The Beatles",
+        title: "Let It Be",
+      },
     ],
   },
   {
