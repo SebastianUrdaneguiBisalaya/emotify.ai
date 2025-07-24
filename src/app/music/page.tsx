@@ -5,34 +5,24 @@ import MiniSearch from "@/components/mini-search";
 import Logo from "@/components/logo";
 import BubbleChat from "@/components/bubble-chat";
 import CardSong from "@/components/card-song";
-import { readStreamableValue } from "ai/rsc";
-import { generate } from "../actions";
-import { Data } from "@/components/types";
-
-export const maxDuration = 40;
+import { useChat } from "@ai-sdk/react";
 
 export default function Music() {
+	const { messages, input, handleInputChange, handleSubmit, status, stop } = useChat({});
 	const [showSearchInSpotify, setShowSearchInSpotify] = useState<boolean>(false);
-	const [data, setData] = useState<Data>({
-		history: [],
-		currentGeneration: null,
-		currentSongsFromAI: [],
-		currentSongsFromSpotify: [],
-	})
 
 	const handleGeneration = async () => {
 		if (!data.currentGeneration) return;
+		const requestUser = {
+			role: "user" as const,
+			content: data.currentGeneration,
+		}
 		try {
 			setShowSearchInSpotify(true);
-			const { object } = await generate("Messages", data.history);
-			for await (const partialObject of readStreamableValue(object)) {
-				if (partialObject) {
-					setData((prev) => ({
-						...prev,
-						currentGeneration: JSON.stringify(partialObject.data, null, 2),
-					}));
-				}
-			}
+			submit({
+				history: data.history,
+				context: data.currentGeneration
+			});
 		} catch (error) {
 			console.log(error);
 		}
@@ -70,8 +60,6 @@ export default function Music() {
 						<div className="w-full p-4 shrink-0">
 							<MiniSearch
 								handleGeneration={handleGeneration}
-								searchInput={data.currentGeneration || ""}
-								setSearchInput={setData}
 							/>
 						</div>
 					</div>

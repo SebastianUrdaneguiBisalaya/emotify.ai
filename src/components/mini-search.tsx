@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { MiniSearchProps } from "@/components/types";
 
-export default function MiniSearch({ handleGeneration, searchInput, setSearchInput }: MiniSearchProps) {
+export default function MiniSearch({ handleGeneration }: MiniSearchProps) {
 	const [showAudioRecordIcon, setShowAudioRecordIcon] = useState<boolean>(true);
 	
 	useEffect(() => {
@@ -19,10 +19,6 @@ export default function MiniSearch({ handleGeneration, searchInput, setSearchInp
 		textArea.style.height = "auto";
 		const newHeight = Math.min(textArea.scrollHeight, 200);
 		textArea.style.height = `${newHeight}px`;
-		setSearchInput((prev) => ({
-			...prev,
-			currentGeneration: textArea.value,
-		}));
 	}
 	return (
 		<div className="w-full flex flex-col gap-2 bg-white/10 border border-gray-light dark:border-gray-light-opacity/20 backdrop-blur-sm rounded-xl px-2 py-4">
