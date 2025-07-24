@@ -1,19 +1,4 @@
-interface Songs {
-	id: string;
-	artist: string;
-	title: string;
-}
-
-interface Data {
-	id: string;
-	role: "user" | "bot";
-	text: string;
-	songs?: Songs[];
-}
-
-interface BubbleChatProps {
-	data: Data[] | null;
-}
+import { BubbleChatProps } from "@/components/types";
 
 export default function BubbleChat({
 	data,
@@ -30,7 +15,7 @@ export default function BubbleChat({
 								key={item.id}
 								className={`flex flex-col gap-2 ${item.role === "user" ? "justify-end" : "justify-start"}`}
 							>
-								<p className={`text-archivo p-2 ${item.role === "user" ? "w-fit self-end text-right rounded-xl bg-gray-light/30 dark:bg-gray-light/20" : "text-left"}`}>{item.text}</p>
+								<p className={`text-archivo p-2 ${item.role === "user" ? "w-fit self-end text-right rounded-xl bg-gray-light/30 dark:bg-gray-light/20" : "text-left"}`}>{item.content}</p>
 								<div
 									className="flex flex-col gap-2 items-center justify-start overflow-x-auto"
 								>

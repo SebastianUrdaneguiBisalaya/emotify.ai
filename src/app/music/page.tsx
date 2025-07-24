@@ -5,13 +5,36 @@ import MiniSearch from "@/components/mini-search";
 import Logo from "@/components/logo";
 import BubbleChat from "@/components/bubble-chat";
 import CardSong from "@/components/card-song";
-import { data, songs } from "@/constants/data";
+import { songs } from "@/constants/data";
+import { readStreamableValue } from "ai/rsc";
+import { generate } from "../actions";
+import { Data } from "@/components/types";
+
+export const maxDuration = 40;
 
 export default function Music() {
 	const [showSearchInSpotify, setShowSearchInSpotify] = useState<boolean>(false);
+	const [data, setData] = useState<Data>({
+		history: [],
+		currentGeneration: null,
+	})
 
-	const handleSearchInSpotify = () => {
-		setShowSearchInSpotify((prev) => !prev);
+	const handleGeneration = async () => {
+		if (!data.currentGeneration) return;
+		try {
+			setShowSearchInSpotify(true);
+			const { object } = await generate("Messages", data.history);
+			for await (const partialObject of readStreamableValue(object)) {
+				if (partialObject) {
+					setData((prev) => ({
+						...prev,
+						currentGeneration: JSON.stringify(partialObject.data, null, 2),
+					}));
+				}
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	return (
@@ -39,10 +62,16 @@ export default function Music() {
 					</div>
 					<div className="flex flex-col h-[calc(100vh-160px)]">
 						<div className="grow overflow-y-auto scrollbar">
-							<BubbleChat data={data}/>
+							<BubbleChat
+								data={data.history}
+							/>
 						</div>
 						<div className="w-full p-4 shrink-0">
-							<MiniSearch onSearch={handleSearchInSpotify} />
+							<MiniSearch
+								handleGeneration={handleGeneration}
+								searchInput={data.currentGeneration || ""}
+								setSearchInput={setData}
+							/>
 						</div>
 					</div>
 				</div>
