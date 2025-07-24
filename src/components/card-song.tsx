@@ -1,13 +1,5 @@
 import Image from "next/image";
-
-interface Song {
-	id: string;
-	artist: string;
-	title: string;
-	image: string;
-	duration: string;
-	type: string;
-}
+import { Song } from "@/components/types";
 
 export default function CardSong({ artist, title, image, duration, type }: Song) {
 	return (

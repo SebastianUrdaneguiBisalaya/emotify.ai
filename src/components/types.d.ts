@@ -37,7 +37,17 @@ interface MiniSearchProps {
   setSearchInput: React.Dispatch<React.SetStateAction<Data>>;
 }
 
+interface Song {
+  id: string;
+  artist: string;
+  title: string;
+  image: string;
+  duration: string;
+  type: string;
+}
+
 export type {
+  Song,
   SongsFromAI,
   SongsFromSpotify,
   History,
