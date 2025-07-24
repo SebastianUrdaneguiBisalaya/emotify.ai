@@ -1,36 +1,31 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { MiniSearchProps } from "@/components/types";
 
-type MiniSearchProps = {
-	onSearch: () => void;
-}
-
-export default function MiniSearch({ onSearch }: MiniSearchProps) {
-	const [search, setSearch] = useState<string>("");
+export default function MiniSearch({ handleGeneration }: MiniSearchProps) {
 	const [showAudioRecordIcon, setShowAudioRecordIcon] = useState<boolean>(true);
 	
 	useEffect(() => {
-		if (search.length > 0) {
+		if (searchInput.length > 0) {
 			setShowAudioRecordIcon(false);
 		} else {
 			setShowAudioRecordIcon(true);
 		}
-	}, [search]);
+	}, [searchInput]);
 
 	const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		const textArea = event.target as HTMLTextAreaElement;
 		textArea.style.height = "auto";
 		const newHeight = Math.min(textArea.scrollHeight, 200);
 		textArea.style.height = `${newHeight}px`;
-		setSearch(textArea.value);
 	}
 	return (
 		<div className="w-full flex flex-col gap-2 bg-white/10 border border-gray-light dark:border-gray-light-opacity/20 backdrop-blur-sm rounded-xl px-2 py-4">
 			<textarea
 				id="mini-search-input"
 				className="w-full font-archivo overflow-y-auto scrollbar max-h-72 focus:outline-none resize-none"
-				value={search}
+				value={searchInput}
 				onChange={handleTextAreaChange}
 			/>
 			<div className="w-full flex flex-row items-center justify-end gap-2">
@@ -54,7 +49,7 @@ export default function MiniSearch({ onSearch }: MiniSearchProps) {
 				}
 				<button
 					className="cursor-pointer bg-black rounded-full px-4 py-2"
-					onClick={onSearch}
+					onClick={handleGeneration}
 				>
 					<span className="font-archivo text-white">
 						Generar

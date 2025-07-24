@@ -5,13 +5,27 @@ import MiniSearch from "@/components/mini-search";
 import Logo from "@/components/logo";
 import BubbleChat from "@/components/bubble-chat";
 import CardSong from "@/components/card-song";
-import { data, songs } from "@/constants/data";
+import { useChat } from "@ai-sdk/react";
 
 export default function Music() {
+	const { messages, input, handleInputChange, handleSubmit, status, stop } = useChat({});
 	const [showSearchInSpotify, setShowSearchInSpotify] = useState<boolean>(false);
 
-	const handleSearchInSpotify = () => {
-		setShowSearchInSpotify((prev) => !prev);
+	const handleGeneration = async () => {
+		if (!data.currentGeneration) return;
+		const requestUser = {
+			role: "user" as const,
+			content: data.currentGeneration,
+		}
+		try {
+			setShowSearchInSpotify(true);
+			submit({
+				history: data.history,
+				context: data.currentGeneration
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	return (
@@ -39,10 +53,14 @@ export default function Music() {
 					</div>
 					<div className="flex flex-col h-[calc(100vh-160px)]">
 						<div className="grow overflow-y-auto scrollbar">
-							<BubbleChat data={data}/>
+							<BubbleChat
+								data={data.history}
+							/>
 						</div>
 						<div className="w-full p-4 shrink-0">
-							<MiniSearch onSearch={handleSearchInSpotify} />
+							<MiniSearch
+								handleGeneration={handleGeneration}
+							/>
 						</div>
 					</div>
 				</div>
@@ -68,7 +86,7 @@ export default function Music() {
 							<div className="w-full grow px-4 py-2 overflow-hidden">
 								<div className="flex flex-col gap-2 overflow-y-auto scrollbar h-[calc(100vh-160px)]">
 									{
-										songs.map((song) => {
+										data.currentSongsFromSpotify.length > 0 && data.currentSongsFromSpotify.map((song) => {
 											return (
 												<CardSong
 													key={song.id}
