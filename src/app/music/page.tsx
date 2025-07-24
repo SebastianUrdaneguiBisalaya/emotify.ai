@@ -5,7 +5,6 @@ import MiniSearch from "@/components/mini-search";
 import Logo from "@/components/logo";
 import BubbleChat from "@/components/bubble-chat";
 import CardSong from "@/components/card-song";
-import { songs } from "@/constants/data";
 import { readStreamableValue } from "ai/rsc";
 import { generate } from "../actions";
 import { Data } from "@/components/types";
@@ -17,6 +16,8 @@ export default function Music() {
 	const [data, setData] = useState<Data>({
 		history: [],
 		currentGeneration: null,
+		currentSongsFromAI: [],
+		currentSongsFromSpotify: [],
 	})
 
 	const handleGeneration = async () => {
@@ -97,7 +98,7 @@ export default function Music() {
 							<div className="w-full grow px-4 py-2 overflow-hidden">
 								<div className="flex flex-col gap-2 overflow-y-auto scrollbar h-[calc(100vh-160px)]">
 									{
-										songs.map((song) => {
+										data.currentSongsFromSpotify.length > 0 && data.currentSongsFromSpotify.map((song) => {
 											return (
 												<CardSong
 													key={song.id}

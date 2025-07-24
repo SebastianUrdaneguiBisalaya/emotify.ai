@@ -1,14 +1,23 @@
-interface Songs {
+interface SongsFromAI {
   id: string;
   artist: string;
   title: string;
+}
+
+interface SongsFromSpotify {
+  id: string;
+  artist: string;
+  title: string;
+  image: string;
+  duration: string;
+  type: string;
 }
 
 interface History {
   id: string;
   role: "data" | "system" | "user" | "assistant";
   content: string;
-  songs?: Songs[];
+  songs?: SongsFromAI[];
 }
 
 interface BubbleChatProps {
@@ -18,6 +27,8 @@ interface BubbleChatProps {
 interface Data {
   history: History[];
   currentGeneration: string | null;
+  currentSongsFromAI: SongsFromAI[];
+  currentSongsFromSpotify: SongsFromSpotify[];
 }
 
 interface MiniSearchProps {
@@ -26,4 +37,11 @@ interface MiniSearchProps {
   setSearchInput: React.Dispatch<React.SetStateAction<Data>>;
 }
 
-export type { Songs, History, Data, BubbleChatProps, MiniSearchProps };
+export type {
+  SongsFromAI,
+  SongsFromSpotify,
+  History,
+  Data,
+  BubbleChatProps,
+  MiniSearchProps,
+};
