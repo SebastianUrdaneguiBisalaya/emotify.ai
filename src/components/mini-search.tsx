@@ -21,20 +21,23 @@ export default function MiniSearch({
 		}
 	}, [input]);
 
-	// const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-	// 	const textArea = event.target as HTMLTextAreaElement;
-	// 	textArea.style.height = "auto";
-	// 	const newHeight = Math.min(textArea.scrollHeight, 200);
-	// 	textArea.style.height = `${newHeight}px`;
-	// }
 	return (
 		<div className="w-full flex flex-col gap-2 bg-white/10 border border-gray-light dark:border-gray-light-opacity/20 backdrop-blur-sm rounded-xl px-2 py-4">
 			<textarea
 				id="mini-search-input"
 				className="w-full font-archivo overflow-y-auto scrollbar max-h-72 focus:outline-none resize-none"
-				value={input}
-				onChange={handleInputChange}
 				disabled={error !== undefined || status !== "ready"}
+				spellCheck={false}
+				autoComplete="off"
+				autoCorrect="off"
+				autoCapitalize="off"
+				value={input}
+				onChange={(e) => {
+					const textArea = e.target as HTMLTextAreaElement;
+					textArea.style.height = "auto";
+					textArea.style.height = `${Math.min(textArea.scrollHeight, 200)}px`;
+					handleInputChange(e);
+				}}
 			/>
 			<div className="w-full flex flex-row items-center justify-end gap-2">
 				{
@@ -48,24 +51,16 @@ export default function MiniSearch({
 						</button>
 					)
 				}
+
 				{
 					(status === "submitted" || status === "streaming") ? (
-						<div className="w-fit h-fit">
-							{
-								status === "submitted" && (
-									<div className="">
-										<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><g fill="none" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path strokeDasharray="16" strokeDashoffset="16" d="M12 3c4.97 0 9 4.03 9 9"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="16;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path><path strokeDasharray="64" strokeDashoffset="64" strokeOpacity=".3" d="M12 3c4.97 0 9 4.03 9 9c0 4.97 -4.03 9 -9 9c-4.97 0 -9 -4.03 -9 -9c0 -4.97 4.03 -9 9 -9Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.2s" values="64;0"/></path></g></svg>
-									</div>
-								)
-							}
-							<button
-								className="w-fit h-fit rounded-full bg-green p-2"
-								type="button"
-								onClick={() => stop()}
-							>
-								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#ffffff" d="M6 18V6h12v12z"/></svg>
-							</button>
-						</div>
+						<button
+							className="w-fit h-fit rounded-full bg-green p-2"
+							type="button"
+							onClick={() => stop()}
+						>
+							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#ffffff" d="M6 18V6h12v12z"/></svg>
+						</button>
 					) : (
 						<button
 							className="cursor-pointer bg-black rounded-full px-4 py-2"

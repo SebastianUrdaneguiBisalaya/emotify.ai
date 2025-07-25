@@ -17,7 +17,6 @@ export default function BubbleChat({
 							>
 								{
 									item.parts?.map((part, index) => {
-										console.log("Parte", part);
 										if (part.type === "text") {
 											return (
 												<p
