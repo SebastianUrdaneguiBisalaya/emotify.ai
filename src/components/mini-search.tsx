@@ -3,39 +3,43 @@
 import { useState, useEffect } from "react";
 import { MiniSearchProps } from "@/components/types";
 
-export default function MiniSearch({ handleGeneration }: MiniSearchProps) {
+export default function MiniSearch({
+		input,
+		handleInputChange,
+		handleSubmit,
+		error,
+		status,
+		stop,
+	}: MiniSearchProps) {
 	const [showAudioRecordIcon, setShowAudioRecordIcon] = useState<boolean>(true);
 	
 	useEffect(() => {
-		if (searchInput.length > 0) {
+		if (input.length > 0) {
 			setShowAudioRecordIcon(false);
 		} else {
 			setShowAudioRecordIcon(true);
 		}
-	}, [searchInput]);
+	}, [input]);
 
-	const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-		const textArea = event.target as HTMLTextAreaElement;
-		textArea.style.height = "auto";
-		const newHeight = Math.min(textArea.scrollHeight, 200);
-		textArea.style.height = `${newHeight}px`;
-	}
 	return (
 		<div className="w-full flex flex-col gap-2 bg-white/10 border border-gray-light dark:border-gray-light-opacity/20 backdrop-blur-sm rounded-xl px-2 py-4">
 			<textarea
 				id="mini-search-input"
 				className="w-full font-archivo overflow-y-auto scrollbar max-h-72 focus:outline-none resize-none"
-				value={searchInput}
-				onChange={handleTextAreaChange}
+				disabled={error !== undefined || status !== "ready"}
+				spellCheck={false}
+				autoComplete="off"
+				autoCorrect="off"
+				autoCapitalize="off"
+				value={input}
+				onChange={(e) => {
+					const textArea = e.target as HTMLTextAreaElement;
+					textArea.style.height = "auto";
+					textArea.style.height = `${Math.min(textArea.scrollHeight, 200)}px`;
+					handleInputChange(e);
+				}}
 			/>
 			<div className="w-full flex flex-row items-center justify-end gap-2">
-				<button
-					className="cursor-pointer rounded-full p-2 bg-green"
-				>
-					<span className="w-fit h-fit flex items-center">
-						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m4.588 14.432a.62.62 0 0 1-.861.2c-2.354-1.434-5.3-1.757-8.794-.968a.618.618 0 0 1-.275-1.206c3.812-.872 7.085-.5 9.714 1.111a.626.626 0 0 1 .217.857zm1.218-2.724a.79.79 0 0 1-1.075.263A13.18 13.18 0 0 0 6.767 12.8a.773.773 0 1 1-.442-1.482a14.62 14.62 0 0 1 11.243 1.327a.77.77 0 0 1 .239 1.063zm.108-2.843C14.688 8.953 9.371 8.774 6.289 9.706a.937.937 0 0 1-.55-1.792c3.537-1.075 9.415-.861 13.119 1.338a.93.93 0 0 1 .322 1.278a.907.907 0 0 1-1.266.334z"/></svg>
-					</span>
-				</button>
 				{
 					showAudioRecordIcon && (
 						<button
@@ -47,14 +51,27 @@ export default function MiniSearch({ handleGeneration }: MiniSearchProps) {
 						</button>
 					)
 				}
-				<button
-					className="cursor-pointer bg-black rounded-full px-4 py-2"
-					onClick={handleGeneration}
-				>
-					<span className="font-archivo text-white">
-						Generar
-					</span>
-				</button>
+
+				{
+					(status === "submitted" || status === "streaming") ? (
+						<button
+							className="w-fit h-fit rounded-full bg-green p-2"
+							type="button"
+							onClick={() => stop()}
+						>
+							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#ffffff" d="M6 18V6h12v12z"/></svg>
+						</button>
+					) : (
+						<button
+							className="cursor-pointer bg-black rounded-full px-4 py-2"
+							onClick={() => handleSubmit()}
+						>
+							<span className="font-archivo text-white">
+								Generar
+							</span>
+						</button>
+					)
+				}
 			</div>
 		</div>
 	)

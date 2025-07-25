@@ -1,8 +1,3 @@
-interface SongsFromAI {
-  artist: string;
-  title: string;
-}
-
 interface SongsFromSpotify {
   id: string;
   artist: string;
@@ -12,34 +7,19 @@ interface SongsFromSpotify {
   type: string;
 }
 
-interface History {
-  role: "data" | "system" | "user" | "assistant";
-  content: string;
-  songs?: SongsFromAI[];
-}
+import { type Message } from "@ai-sdk/react";
 
 interface BubbleChatProps {
-  data: History[] | null;
+  data: Message[];
 }
 
 interface MiniSearchProps {
-  handleGeneration: () => void;
+  input: string;
+  handleInputChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  handleSubmit: () => void;
+  error: Error | undefined;
+  status: "error" | "submitted" | "streaming" | "ready";
+  stop: () => void;
 }
 
-interface Song {
-  id: string;
-  artist: string;
-  title: string;
-  image: string;
-  duration: string;
-  type: string;
-}
-
-export type {
-  Song,
-  SongsFromAI,
-  SongsFromSpotify,
-  History,
-  BubbleChatProps,
-  MiniSearchProps,
-};
+export type { MiniSearchProps, BubbleChatProps, SongsFromSpotify };
