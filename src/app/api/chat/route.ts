@@ -1,6 +1,9 @@
 import { NextRequest } from "next/server";
 import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
+import { z } from "zod";
+import { Songs } from "@/lib/types";
+import { searchSpotifySongs } from "@/lib/utils";
 
 export const maxDuration = 30;
 
@@ -17,10 +20,47 @@ export async function POST(req: NextRequest) {
       "The title of the song must be in real language and the artist should be in real language. " +
       "You must detect the emotion of the user and select the songs that match the emotion. " +
       "You must show the user what emotions you detected and the songs you selected. " +
-      "The response must be in markdown format.",
+      "The response must be in markdown format. " +
+      "When recommending songs, provide them in a structured way so I can process them programmatically. Do not include any other text when returning songs this way.",
     temperature: 0.3,
     maxRetries: 3,
     messages,
+    tools: {
+      getSpotifySongsDetails: {
+        title: "getSpotifySongsDetails",
+        description: "",
+        parameters: z.object({
+          data: z.array(
+            z.object({
+              title: z.string().describe("The title of the song"),
+              artist: z.string().describe("The artist of the song"),
+            })
+          ),
+        }),
+        execute: async ({ data }: Songs) => {
+          const results = [];
+          for (const item of data) {
+            try {
+              const data = await searchSpotifySongs({
+                title: item.title,
+                artist: item.artist,
+              });
+              if (data) {
+                results.push(data);
+              }
+            } catch (error) {
+              console.error(`Error searching for song: ${item.title}`, error);
+              results.push({
+                title: item.title,
+                artist: item.artist,
+                error: "Error searching for song",
+              });
+            }
+          }
+          return { results };
+        },
+      },
+    },
   });
 
   return result.toDataStreamResponse({

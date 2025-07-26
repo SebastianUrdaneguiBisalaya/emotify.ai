@@ -19,7 +19,11 @@ export default function BubbleChat({
 							>
 								<ReactMarkdown
 									components={{
-										p: ({ node: _node, ...props }) => <p className={`text-archivo p-2 ${item.role === "user" ? "w-fit self-end text-right rounded-xl bg-gray-light/30 dark:bg-gray-light/20" : "text-left"}`} {...props} />,
+										h1: ({ node: _node, ...props }) => <h1 className={`text-montserrat p-2 ${item.role === "user" ? "w-fit max-w-[80%] self-end text-right rounded-tl-xl rounded-bl-xl rounded-br-xl rounded-tr-sm bg-gray-light/30 dark:bg-gray-light/20" : "text-left"}`} {...props} />,
+										h2: ({ node: _node, ...props }) => <h2 className={`text-montserrat p-2 ${item.role === "user" ? "w-fit max-w-[80%] self-end text-right rounded-tl-xl rounded-bl-xl rounded-br-xl rounded-tr-sm bg-gray-light/30 dark:bg-gray-light/20" : "text-left"}`} {...props} />,
+										h3: ({ node: _node, ...props }) => <h3 className={`text-montserrat p-2 ${item.role === "user" ? "w-fit max-w-[80%] self-end text-right rounded-tl-xl rounded-bl-xl rounded-br-xl rounded-tr-sm bg-gray-light/30 dark:bg-gray-light/20" : "text-left"}`} {...props} />,
+										span: ({ node: _node, ...props }) => <span className={`text-archivo p-2 ${item.role === "user" ? "w-fit max-w-[80%] self-end text-right rounded-tl-xl rounded-bl-xl rounded-br-xl rounded-tr-sm bg-gray-light/30 dark:bg-gray-light/20" : "text-left"}`} {...props} />,
+										p: ({ node: _node, ...props }) => <p className={`text-archivo p-2 ${item.role === "user" ? "w-fit max-w-[80%] self-end text-right rounded-tl-xl rounded-bl-xl rounded-br-xl rounded-tr-sm bg-gray-light/30 dark:bg-gray-light/20" : "text-left"}`} {...props} />
 									}}
 								>
 									{markdownText}
