@@ -16,7 +16,8 @@ export async function POST(req: NextRequest) {
       "You must detect what is the language of the user like English, Spanish, French, etc. and your response must be in that language. " +
       "The title of the song must be in real language and the artist should be in real language. " +
       "You must detect the emotion of the user and select the songs that match the emotion. " +
-      "You must show the user what emotions you detected and the songs you selected. ",
+      "You must show the user what emotions you detected and the songs you selected. " +
+      "The response must be in markdown format.",
     temperature: 0.3,
     maxRetries: 3,
     messages,
