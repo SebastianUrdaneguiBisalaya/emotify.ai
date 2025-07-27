@@ -15,7 +15,6 @@ export default function Music() {
 	});
 	const [currentRecommendedSongs, setCurrentRecommendedSongs] = useState<SongDetail[]>([]);
 	const [showSpotifyResults, setShowSpotifyResults] = useState<boolean>(false);
-	console.log(messages);
 
 	useEffect(() => {
 		let foundSongs: SongDetail[] = [];

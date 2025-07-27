@@ -14,7 +14,6 @@ let cachedToken: string | null = null;
 let tokenExpiry: number = 0;
 
 const basicAuthSpotify = async () => {
-  console.log("basicAuthSpotify");
   const now = Date.now();
   if (cachedToken && now < tokenExpiry) {
     return cachedToken;
