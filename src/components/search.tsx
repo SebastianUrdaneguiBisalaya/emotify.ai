@@ -3,10 +3,17 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { generateUUID } from "@/lib/utils";
+import { useUserInput } from "@/store/useUserInput";
 
 export default function Search() {
 	const [search, setSearch] = useState<string>("");
 	const [showAudioRecordIcon, setShowAudioRecordIcon] = useState<boolean>(true);
+	const { setCurrentInput } = useUserInput();
+
+	const handleGoToSearch = () => {
+		setCurrentInput(search);
+		setSearch("");
+	}
 	
 	useEffect(() => {
 		if (search.length > 0) {
@@ -50,6 +57,7 @@ export default function Search() {
 				
 				<Link
 					href={`/music/${generateUUID()}`}
+					onClick={handleGoToSearch}
 					className="absolute bottom-4 right-6 cursor-pointer bg-black rounded-full px-4 py-2"
 				>
 					<span className="font-archivo text-white">
