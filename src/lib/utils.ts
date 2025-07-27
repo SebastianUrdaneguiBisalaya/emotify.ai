@@ -7,7 +7,7 @@ export const generateUUID = () => {
 };
 
 export const transformMilliSecondToMinute = (milliSeconds: number) => {
-  return Number((milliSeconds / 60000).toFixed(2));
+  return (milliSeconds / 60000).toFixed(2);
 };
 
 let cachedToken: string | null = null;
@@ -18,15 +18,19 @@ const basicAuthSpotify = async () => {
   if (cachedToken && now < tokenExpiry) {
     return cachedToken;
   }
-  const response = await axios.post("https://accounts.spotify.com/api/token", {
-    grant_type: "client_credentials",
-    headers: {
-      Authorization: `Basic ${Buffer.from(
-        `${process.env.CLIENT_ID_SPOTIFY_API}:${process.env.SECRET_CLIENT_SPOTIFY_API}`
-      )}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-  });
+  const authString = Buffer.from(
+    `${process.env.CLIENT_ID_SPOTIFY_API}:${process.env.SECRET_CLIENT_SPOTIFY_API}`
+  ).toString("base64");
+  const response = await axios.post(
+    "https://accounts.spotify.com/api/token",
+    "grant_type=client_credentials",
+    {
+      headers: {
+        Authorization: `Basic ${authString}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    }
+  );
   if (response.status !== 200) {
     throw new Error(`Spotify API error: ${response.statusText}`);
   }

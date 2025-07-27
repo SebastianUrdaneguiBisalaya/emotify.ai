@@ -12,7 +12,7 @@ interface SongDetail {
   title: string;
   artist: string;
   image: string;
-  duration: number;
+  duration: string;
   popularity: number;
 }
 

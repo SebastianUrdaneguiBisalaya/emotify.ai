@@ -10,7 +10,7 @@ import { SongDetail } from "@/components/types";
 
 export default function Music() {
 	const { messages, input, handleInputChange, handleSubmit, error, status, stop } = useChat({
-		maxSteps: 3,
+		maxSteps: 10,
 
 	});
 	const [currentRecommendedSongs, setCurrentRecommendedSongs] = useState<SongDetail[]>([]);
@@ -35,6 +35,7 @@ export default function Music() {
 			setShowSpotifyResults(true);
 		} else {
 			setShowSpotifyResults(false);
+			setCurrentRecommendedSongs([]);
 		}
 	}, [messages]);
 
@@ -53,8 +54,8 @@ export default function Music() {
 					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 64 64"><path fill="currentColor" d="M32 0C14 0 0 14 0 32c0 21 19 30 22 30c2 0 2-1 2-2v-5c-7 2-10-2-11-5c0 0 0-1-2-3c-1-1-5-3-1-3c3 0 5 4 5 4c3 4 7 3 9 2c0-2 2-4 2-4c-8-1-14-4-14-15q0-6 3-9s-2-4 0-9c0 0 5 0 9 4c3-2 13-2 16 0c4-4 9-4 9-4c2 7 0 9 0 9q3 3 3 9c0 11-7 14-14 15c1 1 2 3 2 6v8c0 1 0 2 2 2c3 0 22-9 22-30C64 14 50 0 32 0"/></svg>
 				</a>
 			</header>
-			<main className="w-full grow flex gap-4 flex-col items-center">
-				<div className="max-w-2xl grow w-full flex flex-col border border-gray-light dark:border-gray-light-opacity/20 rounded-[20px] bg-background/30 overflow-hidden">
+			<main className={`w-full grow flex ${showSpotifyResults ? "flex-row" : "flex-col"} gap-4 items-center`}>
+				<div className={`${showSpotifyResults ? "" : "max-w-2xl"} grow w-full flex flex-col border border-gray-light dark:border-gray-light-opacity/20 rounded-[20px] bg-background/30`}>
 					<div className="w-full flex flex-row items-center justify-between gap-2 px-4 py-2 border-b border-gray-light dark:border-gray-light-opacity/20">
 						<span className="font-archivo text-black dark:text-white text-sm px-4 py-2 bg-gray/20 rounded-lg">Chat</span>
 						<div className="w-fit h-fit flex items-center justify-center">
@@ -82,7 +83,7 @@ export default function Music() {
 				{
 					showSpotifyResults && currentRecommendedSongs.length > 0 && (
 						<div className="w-full flex flex-col border border-gray-light dark:border-gray-light-opacity/20 rounded-[20px] bg-background/30">
-							<div className="w-full h-fit flex flex-row items-center justify-between gap-2 px-4 py-2 border-b border-gray-light dark:border-gray-light-opacity/20">
+							<div className="w-full flex flex-row items-center justify-between gap-2 px-4 py-2 border-b border-gray-light dark:border-gray-light-opacity/20">
 								<span className="font-archivo text-black dark:text-white text-sm px-4 py-2 bg-gray/20 rounded-lg">Resultados</span>
 								<button
 									className="w-fit h-fit flex items-center justify-center bg-green rounded-full p-2 cursor-pointer"
@@ -99,7 +100,7 @@ export default function Music() {
 								</button>
 							</div>
 							<div className="w-full grow px-4 py-2 overflow-hidden">
-								<div className="flex flex-col gap-2 overflow-y-auto scrollbar h-[calc(100vh-160px)]">
+								<div className="flex flex-col gap-2 overflow-y-auto scrollbar h-[calc(100vh-177px)]">
 									{
 										currentRecommendedSongs.map((song) => {
 											return (
