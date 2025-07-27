@@ -6,6 +6,10 @@ export const generateUUID = () => {
   return uuidv4();
 };
 
+export const transformMilliSecondToMinute = (milliSeconds: number) => {
+  return Number((milliSeconds / 60000).toFixed(2));
+};
+
 let cachedToken: string | null = null;
 let tokenExpiry: number = 0;
 
@@ -62,7 +66,7 @@ export const searchSpotifySongs = async ({
       title: track.name,
       artist: track.artists.map((artist) => artist.name).join(", "),
       image: track.album.images[0].url,
-      duration_ms: track.duration_ms / 1000,
+      duration: transformMilliSecondToMinute(track.duration_ms),
       popularity: track.popularity,
     };
   }

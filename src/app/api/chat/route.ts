@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
       "You must detect the emotion of the user and select the songs that match the emotion. " +
       "You must show the user what emotions you detected and the songs you selected. " +
       "The response must be in markdown format. " +
-      "When recommending songs, provide them in a structured way so I can process them programmatically. Do not include any other text when returning songs this way.",
+      "After the response, you must add the song list in a structured way so you can use the 'getSpotifySongsDetails' tool to process them programmatically. Do not include any other text when returning songs this way.",
     temperature: 0.3,
     maxRetries: 3,
     messages,
