@@ -2,7 +2,7 @@ interface SongDetail {
   id: string;
   title: string;
   artist: string;
-  image: string;
+  image: string | null;
   duration: number;
   popularity: number;
 }
