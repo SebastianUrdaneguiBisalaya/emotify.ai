@@ -1,13 +1,42 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import MiniSearch from "@/components/mini-search";
 import Logo from "@/components/logo";
 import BubbleChat from "@/components/bubble-chat";
-// import CardSong from "@/components/card-song";
+import CardSong from "@/components/card-song";
 import { useChat } from "@ai-sdk/react";
+import { SongDetail } from "@/components/types";
 
 export default function Music() {
-	const { messages, input, handleInputChange, handleSubmit, error, status, stop } = useChat({});
+	const { messages, input, handleInputChange, handleSubmit, error, status, stop } = useChat({
+		maxSteps: 3,
+
+	});
+	const [currentRecommendedSongs, setCurrentRecommendedSongs] = useState<SongDetail[]>([]);
+	const [showSpotifyResults, setShowSpotifyResults] = useState<boolean>(false);
+
+	useEffect(() => {
+		let foundSongs: SongDetail[] = [];
+		messages.forEach((mesage) => {
+			mesage.parts.forEach((part) => {
+				if (part.type === "tool-invocation" && part.toolInvocation.state === "result") {
+					if (part.toolInvocation.toolName === "getSpotifySongsDetails" && part.toolInvocation.result) {
+						const newSongs = (part.toolInvocation.result as { results: SongDetail[]}).results;
+						if (newSongs && newSongs.length > 0) {
+							foundSongs = [...foundSongs, ...newSongs];
+						}
+					}
+				}
+			})
+		});
+		if (foundSongs.length > 0) {
+			setCurrentRecommendedSongs(foundSongs);
+			setShowSpotifyResults(true);
+		} else {
+			setShowSpotifyResults(false);
+		}
+	}, [messages]);
 
 	return (
 		<div
@@ -50,8 +79,8 @@ export default function Music() {
 						</div>
 					</div>
 				</div>
-				{/* {
-					showSearchInSpotify && (
+				{
+					showSpotifyResults && currentRecommendedSongs.length > 0 && (
 						<div className="w-full flex flex-col border border-gray-light dark:border-gray-light-opacity/20 rounded-[20px] bg-background/30">
 							<div className="w-full h-fit flex flex-row items-center justify-between gap-2 px-4 py-2 border-b border-gray-light dark:border-gray-light-opacity/20">
 								<span className="font-archivo text-black dark:text-white text-sm px-4 py-2 bg-gray/20 rounded-lg">Resultados</span>
@@ -72,7 +101,7 @@ export default function Music() {
 							<div className="w-full grow px-4 py-2 overflow-hidden">
 								<div className="flex flex-col gap-2 overflow-y-auto scrollbar h-[calc(100vh-160px)]">
 									{
-										data.currentSongsFromSpotify.length > 0 && data.currentSongsFromSpotify.map((song) => {
+										currentRecommendedSongs.map((song) => {
 											return (
 												<CardSong
 													key={song.id}
@@ -81,7 +110,7 @@ export default function Music() {
 													title={song.title}
 													image={song.image}
 													duration={song.duration}
-													type={song.type}
+													popularity={song.popularity}
 												/>
 											)
 										})
@@ -90,7 +119,7 @@ export default function Music() {
 							</div>
 						</div>
 					)
-				} */}
+				}
 			</main>
 		</div>
 	)
