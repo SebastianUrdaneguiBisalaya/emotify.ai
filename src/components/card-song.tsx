@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Song } from "@/components/types";
+import { SongDetail } from "@/components/types";
 
-export default function CardSong({ artist, title, image, duration, type }: Song) {
+export default function CardSong({ title, artist, image, duration, popularity }: SongDetail) {
 	return (
 		<div
 			className="w-full p-2 flex flex-row gap-3 border border-gray-light dark:border-gray-light-opacity/20 rounded-xl"
@@ -18,7 +18,7 @@ export default function CardSong({ artist, title, image, duration, type }: Song)
 				<span className="font-archivo text-sm text-gray-600 dark:text-gray-light text-left">{artist}</span>
 			</div>
 			<div className="flex flex-col justify-center items-center">
-				<span className="font-archivo text-sm text-gray-600 dark:text-white text-right w-fit h-fit bg-gray-light/60 dark:bg-gray-light/20 rounded-full px-2 py-0.5">{type}</span>
+				<span className="font-archivo text-sm text-gray-600 dark:text-white text-right w-fit h-fit bg-gray-light/60 dark:bg-gray-light/20 rounded-full px-2 py-0.5">{popularity}</span>
 			</div>
 			<div className="flex flex-col justify-center items-center">
 				<span className="font-archivo text-sm text-gray-600 dark:text-gray-light text-right px-2">{duration}</span>

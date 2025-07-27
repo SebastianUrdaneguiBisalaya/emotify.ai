@@ -12,7 +12,7 @@ interface SongDetail {
   title: string;
   artist: string;
   image: string;
-  duration_ms: number;
+  duration: number;
   popularity: number;
 }
 
@@ -255,4 +255,10 @@ interface ExternalIDS {
   upc: Href;
 }
 
-export type { Song, Songs, SongDetail, Spotify };
+interface BasicAuthSpotify {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+}
+
+export type { Song, Songs, SongDetail, Spotify, BasicAuthSpotify };

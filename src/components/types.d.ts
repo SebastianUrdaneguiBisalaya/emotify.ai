@@ -1,12 +1,11 @@
-interface SongsFromSpotify {
+interface SongDetail {
   id: string;
-  artist: string;
   title: string;
+  artist: string;
   image: string;
-  duration: string;
-  type: string;
+  duration: number;
+  popularity: number;
 }
-
 import { type Message } from "@ai-sdk/react";
 
 interface BubbleChatProps {
@@ -22,4 +21,4 @@ interface MiniSearchProps {
   stop: () => void;
 }
 
-export type { MiniSearchProps, BubbleChatProps, SongsFromSpotify };
+export type { MiniSearchProps, BubbleChatProps, SongDetail };
