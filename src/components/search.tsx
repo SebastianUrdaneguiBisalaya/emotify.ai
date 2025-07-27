@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { generateUUID } from "@/lib/utils";
 
 export default function Search() {
 	const [search, setSearch] = useState<string>("");
@@ -48,7 +49,7 @@ export default function Search() {
 				}
 				
 				<Link
-					href="/music"
+					href={`/music/${generateUUID()}`}
 					className="absolute bottom-4 right-6 cursor-pointer bg-black rounded-full px-4 py-2"
 				>
 					<span className="font-archivo text-white">
