@@ -26,26 +26,35 @@ Web application to generate a list of songs that the agent recommends based on y
 ## **Installation**
 
 1. **Fork this repository**
+   
    Click the "Fork" button in the top right corner to create your own copy of this repo.
 2. **Clone your fork locally**
 ```bash
 git clone https://github.com/your-username/your-fork.git
 cd your-fork
 ```
-3. **Create a new branch for your changes**
+3. **Create an .env file**
+   
+   Create a new file named .env in the root directory of the project and add the following variables with your own values:
+```bash
+GOOGLE_GENERATIVE_AI_API_KEY=AbCXXXXXXXXXXXXXXyz
+CLIENT_ID_SPOTIFY_API=XyzXXXXXXXXXXXXXAbC
+SECRET_CLIENT_SPOTIFY_API=bCDXXXXXXXXXXXXXlMN
+```
+4. **Create a new branch for your changes**
 ```bash	
 git switch -c your-feature-branch
 ```
-4. **Make your changes and commit**
+5. **Make your changes and commit**
 ```bash	
 git add .
 git commit -m "Clear and concise description of your changes using the best practices"
 ```
-5. **Push the branch to your fork**
+6. **Push the branch to your fork**
 ```bash	
 git push origin your-feature-branch
 ```
-6. **Open a Pull Request**
+7. **Open a Pull Request**
    
    • Go to your fork on GitHub.
 
