@@ -67,6 +67,7 @@ export const searchSpotifySongs = async ({
   if (track) {
     return {
       id: track.id,
+      uri: track.uri,
       title: track.name,
       artist: track.artists.map((artist) => artist.name).join(", "),
       image: track.album.images[0].url,
@@ -75,4 +76,15 @@ export const searchSpotifySongs = async ({
     };
   }
   return null;
+};
+
+export const generateRandomString = (length: number) => {
+  let result = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
 };

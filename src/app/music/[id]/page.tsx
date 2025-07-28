@@ -20,8 +20,12 @@ export default function Music() {
 	});
 	
 	const [currentRecommendedSongs, setCurrentRecommendedSongs] = useState<SongDetail[]>([]);
-	const [showSpotifyResults, setShowSpotifyResults] = useState<boolean>(false);
+	const [showSpotifyResults, setShowSpotifyResults] = useState<boolean>(true);
 	const [initialChatSent, setInitialChatSent] = useState<boolean>(false);
+
+	const handleLogin = () => {
+		window.location.href = "/api/auth";
+	}
 
 	useEffect(() => {
 		if (!initialQuery || initialQuery.trim() === "") {
@@ -101,13 +105,14 @@ export default function Music() {
 					</div>
 				</div>
 				{
-					showSpotifyResults && currentRecommendedSongs.length > 0 && (
+					showSpotifyResults && currentRecommendedSongs.length === 0 && (
 						<div className="w-full flex flex-col border border-gray-light dark:border-gray-light-opacity/20 rounded-[20px] bg-background/30">
 							<div className="w-full flex flex-row items-center justify-between gap-2 px-4 py-2 border-b border-gray-light dark:border-gray-light-opacity/20">
 								<span className="font-archivo text-black dark:text-white text-sm px-4 py-2 bg-gray/20 rounded-lg">Resultados</span>
 								<button
 									className="w-fit h-fit flex items-center justify-center bg-green rounded-full p-2 cursor-pointer"
 									type="button"
+									onClick={handleLogin}
 								>
 									<span className="text-montserrat text-xs text-white flex flex-row items-center gap-0.5">
 										<span className="w-fit h-fit flex items-center justify-center">
@@ -127,6 +132,7 @@ export default function Music() {
 												<CardSong
 													key={song.id}
 													id={song.id}
+													uri={song.uri}
 													artist={song.artist}
 													title={song.title}
 													image={song.image}
