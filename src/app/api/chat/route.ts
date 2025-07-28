@@ -54,6 +54,9 @@ export async function POST(req: NextRequest) {
                 id: `error-${item.title}-${item.artist}-${Math.random()
                   .toString(36)
                   .substring(7)}`,
+                uri: `error-${item.title}-${item.artist}-${Math.random()
+                  .toString(36)
+                  .substring(7)}`,
                 title: item.title,
                 artist: item.artist,
                 image: null,

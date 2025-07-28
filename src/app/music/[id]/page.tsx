@@ -127,6 +127,7 @@ export default function Music() {
 												<CardSong
 													key={song.id}
 													id={song.id}
+													uri={song.uri}
 													artist={song.artist}
 													title={song.title}
 													image={song.image}

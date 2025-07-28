@@ -1,5 +1,6 @@
 interface SongDetail {
   id: string;
+  uri: string;
   title: string;
   artist: string;
   image: string | null;

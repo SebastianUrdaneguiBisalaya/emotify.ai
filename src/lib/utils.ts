@@ -67,6 +67,7 @@ export const searchSpotifySongs = async ({
   if (track) {
     return {
       id: track.id,
+      uri: track.uri,
       title: track.name,
       artist: track.artists.map((artist) => artist.name).join(", "),
       image: track.album.images[0].url,
