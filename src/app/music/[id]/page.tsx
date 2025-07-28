@@ -7,11 +7,11 @@ import BubbleChat from "@/components/bubble-chat";
 import CardSong from "@/components/card-song";
 import { useChat } from "@ai-sdk/react";
 import { SongDetail } from "@/components/types";
+import { generateUUID } from "@/lib/utils";
 
 export default function Music() {
 	const { messages, input, handleInputChange, handleSubmit, error, status, stop } = useChat({
 		maxSteps: 10,
-
 	});
 	const [currentRecommendedSongs, setCurrentRecommendedSongs] = useState<SongDetail[]>([]);
 	const [showSpotifyResults, setShowSpotifyResults] = useState<boolean>(false);
