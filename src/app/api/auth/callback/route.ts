@@ -15,7 +15,7 @@ export async function GET(req: Request) {
     const params = new URLSearchParams({
       error: "state_mismatch",
     });
-    return NextResponse.redirect(`/#?${params.toString()}`);
+    return NextResponse.redirect(new URL(`/#?${params.toString()}`, req.url));
   }
 
   const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString(
@@ -42,7 +42,7 @@ export async function GET(req: Request) {
 
     const { access_token, expires_in, refresh_token } = data;
 
-    const res = NextResponse.redirect(new URL("/music/", req.url));
+    const res = NextResponse.redirect(new URL("/create-playlist/", req.url));
 
     res.cookies.set({
       name: "spotify_access_token",
