@@ -78,7 +78,11 @@ cd your-fork
 GOOGLE_GENERATIVE_AI_API_KEY=AbCXXXXXXXXXXXXXXyz
 CLIENT_ID_SPOTIFY_API=XyzXXXXXXXXXXXXXAbC
 SECRET_CLIENT_SPOTIFY_API=bCDXXXXXXXXXXXXXlMN
+NODE_ENV=development
 ```
+
+If you want to use the production environment, you can set the NODE_ENV variable to production.
+
 4. **Create a new branch for your changes**
 ```bash	
 git switch -c your-feature-branch
