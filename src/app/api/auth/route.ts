@@ -4,7 +4,7 @@ import { generateRandomString } from "@/lib/utils";
 export async function GET() {
   const state = generateRandomString(16);
   const scope = "user-read-private user-read-email playlist-modify-private";
-  const redirectUri = "http://192.168.18.12:3000/auth/callback";
+  const redirectUri = "http://127.0.0.1:3000/api/auth/callback";
 
   const params = new URLSearchParams({
     response_type: "code",

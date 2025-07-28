@@ -7,7 +7,7 @@ export async function GET(req: Request) {
   const code = searchParams.get("code");
   const state = searchParams.get("state");
 
-  const redirectUri = "http://192.168.18.12:3000/auth/callback";
+  const redirectUri = "http://127.0.0.1:3000/api/auth/callback";
   const clientId = process.env.CLIENT_ID_SPOTIFY_API as string;
   const clientSecret = process.env.SECRET_CLIENT_SPOTIFY_API as string;
 
@@ -42,27 +42,18 @@ export async function GET(req: Request) {
 
     const { access_token, expires_in, refresh_token } = data;
 
-    const res = NextResponse.redirect(new URL("/create-playlist/", req.url));
-
-    res.cookies.set({
-      name: "spotify_access_token",
-      value: access_token,
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      maxAge: expires_in,
-      path: "/",
+    const interimRedirectParams = new URLSearchParams({
+      access_token: access_token,
+      expires_in: expires_in.toString(),
+      refresh_token: refresh_token,
     });
 
-    res.cookies.set({
-      name: "spotify_refresh_token",
-      value: refresh_token,
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      maxAge: expires_in,
-      path: "/",
-    });
-
-    return res;
+    return NextResponse.redirect(
+      new URL(
+        `/api/auth/set-cookies?${interimRedirectParams.toString()}`,
+        req.url
+      )
+    );
   } catch (error: unknown) {
     console.error("Error obtaining access token:", error);
     return NextResponse.json(
