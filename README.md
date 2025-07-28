@@ -25,9 +25,41 @@ Web application to generate a list of songs that the agent recommends based on y
 7. [**Next.js AI SDK**](https://ai-sdk.dev/) - A free open-source library for building AI-powered applications.
 8. [**Spotify API**](https://developer.spotify.com/documentation/web-api/) - A REST API for interacting with the Spotify music service.
 
-## APIs Route with Next.js
+## **APIs Route with Next.js**
 
 Understanding the structure of the APIs Route with Next.js in this project is crucial for the development of the application.
+
+#### [GET] `/api/auth`
+
+**Description:**
+
+#### [GET] `/api/auth/callback`
+
+**Description:**
+
+#### [POST] `/api/auth/set-cookies`
+
+**Description:**
+
+#### [GET] `/api/auth/refresh-token`
+
+**Description:**
+
+#### [POST] `/api/chat`
+
+**Description:**
+
+#### [GET] `/api/me`
+
+**Description:**
+
+#### [POST] `/api/playlist/create`
+
+**Description:**
+
+#### [POST] `/api/playlist/add-songs`
+
+**Description:**
 
 ## **Installation**
 
