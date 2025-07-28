@@ -46,10 +46,15 @@ git commit -m "Clear and concise description of your changes using the best prac
 git push origin your-feature-branch
 ```
 6. **Open a Pull Request**
+   
    • Go to your fork on GitHub.
+
 	 • Click on "Compare & pull request".
+	 
 	 • Choose the correct base (`main` on the original repo).
+	 
 	 • Add a description explaining what your PR does.
+	 
 	 • Submit the pull request.
 
 ## **Terms of Use**
