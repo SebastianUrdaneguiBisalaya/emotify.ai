@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import axios from "axios";
 import { cookies } from "next/headers";
 
-export async function POST(req: Request) {
+export async function POST() {
   const cookieStore = await cookies();
   const refresh_token = cookieStore.get("spotify_refresh_token")?.value;
 
