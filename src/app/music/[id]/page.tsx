@@ -1,39 +1,40 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import MiniSearch from "@/components/mini-search";
 import Logo from "@/components/logo";
 import BubbleChat from "@/components/bubble-chat";
 import CardSong from "@/components/card-song";
 import { useChat } from "@ai-sdk/react";
 import { SongDetail } from "@/components/types";
-import { generateUUID } from "@/lib/utils";
 import { useSearchParams, useRouter } from "next/navigation";
 
 export default function Music() {
 	const router = useRouter();
 	const searchParams = useSearchParams();
-	const initialInput = searchParams.get("q");
-
-	const initialMessages = useMemo(() => {
-		if (!initialInput || initialInput.trim() === "") return [];
-		return [{ id: generateUUID(), role: "user" as const, content: initialInput }];
-	}, [initialInput]);
+	const initialQuery = searchParams.get("q");
 	
 	const { messages, input, handleInputChange, handleSubmit, error, status, stop } = useChat({
-		initialMessages,
+		initialInput: initialQuery ? initialQuery : "",
 		maxSteps: 10,
 	});
 	
 	const [currentRecommendedSongs, setCurrentRecommendedSongs] = useState<SongDetail[]>([]);
 	const [showSpotifyResults, setShowSpotifyResults] = useState<boolean>(false);
+	const [initialChatSent, setInitialChatSent] = useState<boolean>(false);
 
 	useEffect(() => {
-		const q = searchParams.get("q");
-		if (!q || q.trim() === "") {
+		if (!initialQuery || initialQuery.trim() === "") {
 			router.push("/");
 		}
-	}, [searchParams, router]);
+	}, [initialQuery, router]);
+
+	useEffect(() => {
+		if (initialQuery && initialQuery.trim() !== "" && !initialChatSent) {
+			handleSubmit();
+			setInitialChatSent(true);
+		}
+	}, [initialQuery, handleSubmit, initialChatSent]);
 
 	useEffect(() => {
 		let foundSongs: SongDetail[] = [];

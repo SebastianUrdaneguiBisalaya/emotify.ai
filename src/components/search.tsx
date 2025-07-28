@@ -6,7 +6,12 @@ import { generateUUID } from "@/lib/utils";
 
 export default function Search() {
 	const [search, setSearch] = useState<string>("");
+	const [id, setId] = useState<string>("");
 	const [showAudioRecordIcon, setShowAudioRecordIcon] = useState<boolean>(true);
+
+	useEffect(() => {
+		setId(generateUUID());
+	}, []);
 	
 	useEffect(() => {
 		if (search.length > 0) {
@@ -49,7 +54,7 @@ export default function Search() {
 				}
 				
 				<Link
-					href={`/music/${generateUUID()}?q=${encodeURIComponent(search)}`}
+					href={`/music/${id}?q=${encodeURIComponent(search)}`}
 					className="absolute bottom-4 right-6 cursor-pointer bg-black rounded-full px-4 py-2"
 				>
 					<span className="font-archivo text-white">
