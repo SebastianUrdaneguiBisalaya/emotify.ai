@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import MiniSearch from "@/components/mini-search";
 import Logo from "@/components/logo";
 import BubbleChat from "@/components/bubble-chat";
@@ -8,13 +8,32 @@ import CardSong from "@/components/card-song";
 import { useChat } from "@ai-sdk/react";
 import { SongDetail } from "@/components/types";
 import { generateUUID } from "@/lib/utils";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export default function Music() {
+	const router = useRouter();
+	const searchParams = useSearchParams();
+	const initialInput = searchParams.get("q");
+
+	const initialMessages = useMemo(() => {
+		if (!initialInput || initialInput.trim() === "") return [];
+		return [{ id: generateUUID(), role: "user" as const, content: initialInput }];
+	}, [initialInput]);
+	
 	const { messages, input, handleInputChange, handleSubmit, error, status, stop } = useChat({
+		initialMessages,
 		maxSteps: 10,
 	});
+	
 	const [currentRecommendedSongs, setCurrentRecommendedSongs] = useState<SongDetail[]>([]);
 	const [showSpotifyResults, setShowSpotifyResults] = useState<boolean>(false);
+
+	useEffect(() => {
+		const q = searchParams.get("q");
+		if (!q || q.trim() === "") {
+			router.push("/");
+		}
+	}, [searchParams, router]);
 
 	useEffect(() => {
 		let foundSongs: SongDetail[] = [];
