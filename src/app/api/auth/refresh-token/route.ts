@@ -12,7 +12,7 @@ export async function POST() {
         error: "refresh_token_not_found",
       },
       {
-        status: 400,
+        status: 401,
       }
     );
   }

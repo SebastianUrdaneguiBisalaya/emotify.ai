@@ -88,3 +88,22 @@ export const generateRandomString = (length: number) => {
   }
   return result;
 };
+
+export const refreshAccessToken = async (
+  req: Request
+): Promise<string | null> => {
+  try {
+    const res = await axios.post(
+      new URL("/api/auth/refresh-token", req.url).toString(),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return res.data.access_token;
+  } catch (error) {
+    console.error("Error refreshing token:", error);
+    return null;
+  }
+};
