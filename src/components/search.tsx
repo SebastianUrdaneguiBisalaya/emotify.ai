@@ -32,6 +32,10 @@ export default function Search() {
 					className="ml-10 mr-24 font-archivo w-full focus:outline-none resize-none scrollbar-hide bg-transparent transition-all duration-200 ease-in-out"
 					placeholder="How do you fell or what are you going to do?"
 					value={search}
+					spellCheck={false}
+					autoComplete="off"
+					autoCorrect="off"
+					autoCapitalize="off"
 					onChange={(event) => {
 						const textArea = event.target as HTMLTextAreaElement;
 						textArea.style.height = "auto";
