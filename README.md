@@ -12,7 +12,7 @@ Web application to generate a list of songs that the agent recommends based on y
 
 ![emotify.ai web app](./public/emotify-web.png)
 
-![emotify.ai web app](./public/emotify-web-music-page.png)
+![emotify.ai web app](./public/emotify-web-music.png)
 
 ## **Tech Stack**
 
