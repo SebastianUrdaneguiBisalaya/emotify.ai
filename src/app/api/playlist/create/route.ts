@@ -37,7 +37,6 @@ export async function POST(req: Request) {
   const cookieStore = await cookies();
   const access_token = cookieStore.get("spotify_access_token")?.value;
   const refresh_token = cookieStore.get("spotify_refresh_token")?.value;
-
   if (!access_token) {
     return NextResponse.json(
       {

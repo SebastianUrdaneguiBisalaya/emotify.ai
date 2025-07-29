@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
       "You must detect the emotion of the user and select the songs that match the emotion. " +
       "You must show the user what emotions you detected and the songs you selected. " +
       "The response must be in markdown format. " +
-      "After providing the initial message about the user's situation and detected emotions, you MUST call the 'getSpotifySongsDetails' tool with a 'data' array containing the 'title' and 'artist' for each of the 20 recommended songs. DO NOT output the detailed song information (like ID, duration, popularity, image URL) directly in text or JSON format within your conversational response. The frontend will handle displaying the Spotify details.",
+      "After providing the initial message about the user's situation and detected emotions, you MUST call the 'getSpotifySongsDetails' tool with a 'data' array containing the 'title' and 'artist' for each of the 5 recommended songs. DO NOT output the detailed song information (like ID, duration, popularity, image URL) directly in text or JSON format within your conversational response. The frontend will handle displaying the Spotify details.",
     temperature: 0.3,
     maxRetries: 3,
     messages,
