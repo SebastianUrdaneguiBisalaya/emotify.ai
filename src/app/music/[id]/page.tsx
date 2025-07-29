@@ -20,7 +20,7 @@ export default function Music() {
 	});
 	
 	const [currentRecommendedSongs, setCurrentRecommendedSongs] = useState<SongDetail[]>([]);
-	const [showSpotifyResults, setShowSpotifyResults] = useState<boolean>(true);
+	const [showSpotifyResults, setShowSpotifyResults] = useState<boolean>(false);
 	const [initialChatSent, setInitialChatSent] = useState<boolean>(false);
 
 	const handleLogin = () => {
@@ -28,7 +28,9 @@ export default function Music() {
 			return item.uri
 		});
 		localStorage.setItem("songs", JSON.stringify(listuris));
-		window.location.href = "/api/auth";
+		setTimeout(() => {
+			window.location.href = "/api/auth";
+		}, 100);
 	}
 
 	useEffect(() => {
@@ -109,7 +111,7 @@ export default function Music() {
 					</div>
 				</div>
 				{
-					showSpotifyResults && currentRecommendedSongs.length === 0 && (
+					showSpotifyResults && currentRecommendedSongs.length > 0 && (
 						<div className="w-full flex flex-col border border-gray-light dark:border-gray-light-opacity/20 rounded-[20px] bg-background/30">
 							<div className="w-full flex flex-row items-center justify-between gap-2 px-4 py-2 border-b border-gray-light dark:border-gray-light-opacity/20">
 								<span className="font-archivo text-black dark:text-white text-sm px-4 py-2 bg-gray/20 rounded-lg">Resultados</span>

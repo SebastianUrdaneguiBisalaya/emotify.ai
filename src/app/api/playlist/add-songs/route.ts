@@ -5,13 +5,15 @@ import { refreshAccessToken } from "@/lib/utils";
 
 const addSongsToPlaylist = async (
   token: string,
-  playlist_id: string,
+  playlist_id: {
+    id: string;
+  },
   songs: string[]
 ) => {
   await axios.post(
-    `https://api.spotify.com/v1/playlists/${playlist_id}/tracks`,
+    `https://api.spotify.com/v1/playlists/${playlist_id.id}/tracks`,
     {
-      uris: songs.join(","),
+      uris: songs,
     },
     {
       headers: {
@@ -24,6 +26,16 @@ const addSongsToPlaylist = async (
 
 export async function POST(req: Request) {
   const { playlist_id, songs } = await req.json();
+  if (!playlist_id || !songs) {
+    return NextResponse.json(
+      {
+        error: "playlist_id_or_songs_not_found",
+      },
+      {
+        status: 401,
+      }
+    );
+  }
   const cookieStore = await cookies();
   const access_token = cookieStore.get("spotify_access_token")?.value;
   const refresh_token = cookieStore.get("spotify_refresh_token")?.value;
@@ -41,6 +53,14 @@ export async function POST(req: Request) {
 
   try {
     await addSongsToPlaylist(access_token, playlist_id, songs);
+    return NextResponse.json(
+      {
+        message: "Playlist created successfully.",
+      },
+      {
+        status: 200,
+      }
+    );
   } catch (error) {
     const status = axios.isAxiosError(error) ? error.response?.status : null;
     if (status === 401 && refresh_token) {
@@ -58,6 +78,14 @@ export async function POST(req: Request) {
 
       try {
         await addSongsToPlaylist(newAccessToken, playlist_id, songs);
+        return NextResponse.json(
+          {
+            message: "Playlist created successfully.",
+          },
+          {
+            status: 200,
+          }
+        );
       } catch (error) {
         console.error("Error after token refresh:", error);
         return NextResponse.json(
@@ -72,7 +100,7 @@ export async function POST(req: Request) {
     }
     return NextResponse.json(
       {
-        error: "No se logró crear la playlist.",
+        error: "No se logró añadir las canciones a la playlist.",
       },
       {
         status: 500,

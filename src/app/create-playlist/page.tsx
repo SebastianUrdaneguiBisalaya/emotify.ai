@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Logo from "@/components/logo";
 import { User, DataForCreatePlaylist, LoadingStates } from "@/lib/types";
-import { config } from "@/config/config";
+import { useRouter } from "next/navigation";
 
 export default function CreatePlaylist() {
+	const router = useRouter();
 	const [dataForCreatePlaylist, setDataForCreateList] = useState<DataForCreatePlaylist>({
 		name: "",
 		description: "",
@@ -20,25 +21,23 @@ export default function CreatePlaylist() {
 	const [user, setUser] = useState<User>();
 
 	const createPlaylist = async (user_id: string, name: string, description: string) => {
-		if (!user_id || !name) {
-			const res = await axios.post(`${config.baseUrl}/api/playlist/create`, {
-				user_id: user_id,
-				name: name,
-				description: description,
-			});
-			return res.data;
-		}
+		const res = await axios.post("/api/playlist/create", {
+			user_id: user_id,
+			name: name,
+			description: description,
+		});
+		return res.data;
 	}
 
 	const addSongsToPlaylist = async (playlistId: string, songs: string[]) => {
-		await axios.post(`${config.baseUrl}/api/playlist/add-songs`, {
+		await axios.post("/api/playlist/add-songs", {
 			playlist_id: playlistId,
 			songs: songs,
 		});
 	}
 
 	const handleOnSubmit = async () => {
-		if (dataForCreatePlaylist.name.trim() === "" || dataForCreatePlaylist.description.trim() || !user?.id) {
+		if (dataForCreatePlaylist.name.trim() === "" || dataForCreatePlaylist.description.trim() === "" || !user?.id) {
 			return;
 		}
 		try {
@@ -54,6 +53,9 @@ export default function CreatePlaylist() {
 			}))
 			await addSongsToPlaylist(playlistId, songs);
 			localStorage.removeItem("songs");
+			setTimeout(() => {
+				router.replace("/")
+			}, 100);
 		} catch (error) {
 			console.error("Error creating playlist or adding songs:", error);
 		} finally {
@@ -73,12 +75,12 @@ export default function CreatePlaylist() {
 				setSongs(data);
 			}
 		}
-	}, [songs]);
+	}, []);
 
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-				const res = await axios.get(`${config.baseUrl}/api/me`);
+				const res = await axios.get("/api/me");
 				setUser(res.data);
 			} catch (error) {
 				console.error("Error fetching user:", error);
@@ -109,6 +111,10 @@ export default function CreatePlaylist() {
 				{
 					user && user.id && (
 						<div className="shadow-2xl shadow-black/20 dark:shadow-white/20 max-w-md w-full p-4 flex flex-col items-center gap-6 border border-gray-light dark:border-gray-light-opacity/20 rounded-xl bg-background/30 backdrop-blur-sm">
+							<div className="w-full flex flex-col items-center">
+								<p className="font-montserrat text-center font-medium">Hola {user.display_name}</p>
+								<p className="font-archivo text-center text-sm text-gray dark:text-gray-light">{user.email}</p>
+							</div>
 							<h1 className="font-montserrat font-semibold text-center text-xl">
 								Crear playlist y añadir las canciones recomendadas
 							</h1>
@@ -128,7 +134,7 @@ export default function CreatePlaylist() {
 							/>
 							<textarea
 								id="playlist-description"
-								className="text-archivo w-full p-2 rounded-md bg-transparent border border-gray-light dark:border-gray-light-opacity/20 scrollbar-hide"
+								className="resize-none text-archivo w-full p-2 rounded-md bg-transparent border border-gray-light dark:border-gray-light-opacity/20 scrollbar-hide"
 								placeholder="Descripción de la playlist 🚀"
 								value={dataForCreatePlaylist.description}
 								onChange={(event) => {
