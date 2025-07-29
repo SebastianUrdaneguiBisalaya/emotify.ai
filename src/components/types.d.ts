@@ -22,4 +22,8 @@ interface MiniSearchProps {
   stop: () => void;
 }
 
-export type { MiniSearchProps, BubbleChatProps, SongDetail };
+interface ShinyTextProps {
+  text: string;
+}
+
+export type { MiniSearchProps, BubbleChatProps, SongDetail, ShinyTextProps };
