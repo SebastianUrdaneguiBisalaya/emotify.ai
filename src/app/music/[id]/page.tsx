@@ -114,7 +114,7 @@ export default function Music() {
 					showSpotifyResults && currentRecommendedSongs.length > 0 && (
 						<div className="w-full flex flex-col border border-gray-light dark:border-gray-light-opacity/20 rounded-[20px] bg-background/30">
 							<div className="w-full flex flex-row items-center justify-between gap-2 px-4 py-2 border-b border-gray-light dark:border-gray-light-opacity/20">
-								<span className="font-archivo text-black dark:text-white text-sm px-4 py-2 bg-gray/20 rounded-lg">Resultados</span>
+								<span className="font-archivo text-black dark:text-white text-sm px-4 py-2 bg-gray/20 rounded-lg">Results</span>
 								<button
 									className="w-fit h-fit flex items-center justify-center bg-green rounded-full p-2 cursor-pointer"
 									type="button"
@@ -125,7 +125,7 @@ export default function Music() {
 											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ffffff" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z"/></svg>
 										</span>
 										<span>
-											Playlist
+											Add playlist
 										</span>
 									</span>
 								</button>

@@ -21,6 +21,19 @@
   --font-archivo: var(--font-archivo);
 }
 
+@theme {
+  --animate-shimmer: shimmer 2s linear infinite;
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #121212;

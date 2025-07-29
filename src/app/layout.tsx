@@ -13,8 +13,8 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  title: "emotify.ai - La música que encaja con tu estado de ánimo",
-  description: "La música que encaja con tu estado de ánimo",
+  title: "emotify.ai - Discover the music that suits your mood",
+  description: "Discover the music that suits your mood",
 };
 
 export default function RootLayout({

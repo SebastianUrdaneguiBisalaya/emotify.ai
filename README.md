@@ -10,9 +10,11 @@
 
 Web application to generate a list of songs that the agent recommends based on your preferences or feelings and create a Spotify playlist in your account from these recommended songs through Gemini Flash 2.0, Next.js AI SDK, and Spotify API.
 
-![emotify.ai web app](./public/emotify-web.png)
+![emotify.ai hero](./public/hero.png)
 
-![emotify.ai web app](./public/emotify-web-music.png)
+![emotify.ai web app](./public/result.png)
+
+**This web application accepts light/dark mode based on the user's system preferences.**
 
 ## **Tech Stack**
 
@@ -82,6 +84,14 @@ NODE_ENV=development
 ```
 
 If you want to use the production environment, you can set the NODE_ENV variable to production.
+
+- **Google Studio**
+
+   This web applications uses the Gemini Flash 2.0 model to generate the chat messages. To use this model, you need to create api key in the Google Studio. I recommend you see the [documentation](https://aistudio.google.com/).
+
+- **Spotify for Developers**
+
+	To use the Spotify API, you need to create a new app in the Spotify for Developers. I recommend you see the [documentation](https://developer.spotify.com/).
 
 4. **Create a new branch for your changes**
 ```bash	

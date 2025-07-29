@@ -67,7 +67,7 @@ export default function MiniSearch({
 							onClick={() => handleSubmit()}
 						>
 							<span className="font-archivo text-white">
-								Generar
+								Generate
 							</span>
 						</button>
 					)
