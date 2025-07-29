@@ -400,6 +400,24 @@ export interface ExternalIDS {
   upc: string;
 }
 
+export interface User {
+  email: string;
+  id: string;
+  display_name: string;
+  image: string;
+}
+
+export interface DataForCreatePlaylist {
+  name: string;
+  description: string;
+}
+
+export interface LoadingStates {
+  userLoading: boolean;
+  createPlaylistLoading: boolean;
+  addSongsToPlaylistLoading: boolean;
+}
+
 export type {
   Song,
   Songs,
@@ -407,5 +425,8 @@ export type {
   Spotify,
   BasicAuthSpotify,
   Me,
+  User,
   Playlist,
+  DataForCreatePlaylist,
+  LoadingStates,
 };
