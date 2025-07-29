@@ -31,35 +31,35 @@ Understanding the structure of the APIs Route with Next.js in this project is cr
 
 #### [GET] `/api/auth`
 
-**Description:**
+**Description:** Endpoint to request authorization to Spotify user data.
 
 #### [GET] `/api/auth/callback`
 
-**Description:**
+**Description:** Endpoint to handle the callback from Spotify authorization.
 
 #### [POST] `/api/auth/set-cookies`
 
-**Description:**
+**Description:** Endpoint to set the cookies with `httpOnly` in the server side.
 
 #### [GET] `/api/auth/refresh-token`
 
-**Description:**
+**Description:** Endpoint to refresh the access token.
 
 #### [POST] `/api/chat`
 
-**Description:**
+**Description:** Endpoint to generate the chat messages using ai sdk of Next.js.
 
 #### [GET] `/api/me`
 
-**Description:**
+**Description:** Endpoint to get the user data from Spotify.
 
 #### [POST] `/api/playlist/create`
 
-**Description:**
+**Description:** Endpoint to create a playlist in Spotify.
 
 #### [POST] `/api/playlist/add-songs`
 
-**Description:**
+**Description:** Endpoint to add songs to a playlist in Spotify.
 
 ## **Installation**
 
