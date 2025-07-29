@@ -24,6 +24,10 @@ export default function Music() {
 	const [initialChatSent, setInitialChatSent] = useState<boolean>(false);
 
 	const handleLogin = () => {
+		const listuris = currentRecommendedSongs.map((item) => {
+			return item.uri
+		});
+		localStorage.setItem("songs", JSON.stringify(listuris));
 		window.location.href = "/api/auth";
 	}
 
