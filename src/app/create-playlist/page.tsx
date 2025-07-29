@@ -112,16 +112,16 @@ export default function CreatePlaylist() {
 					user && user.id && (
 						<div className="shadow-2xl shadow-black/20 dark:shadow-white/20 max-w-md w-full p-4 flex flex-col items-center gap-6 border border-gray-light dark:border-gray-light-opacity/20 rounded-xl bg-background/30 backdrop-blur-sm">
 							<div className="w-full flex flex-col items-center">
-								<p className="font-montserrat text-center font-medium">Hola {user.display_name}</p>
+								<p className="font-montserrat text-center font-medium">Welcome back, {user.display_name}</p>
 								<p className="font-archivo text-center text-sm text-gray dark:text-gray-light">{user.email}</p>
 							</div>
 							<h1 className="font-montserrat font-semibold text-center text-xl">
-								Crear playlist y añadir las canciones recomendadas
+								Create playlist and add recommended songs
 							</h1>
 							<input
 								id="playlist-name"
 								className="text-archivo w-full p-2 rounded-md bg-transparent border border-gray-light dark:border-gray-light-opacity/20"
-								placeholder="Nombre de la playlist 🎵"
+								placeholder="Playlist name 🎵"
 								value={dataForCreatePlaylist.name}
 								onChange={(event) => {
 									const input = event.target as HTMLInputElement;
@@ -135,7 +135,7 @@ export default function CreatePlaylist() {
 							<textarea
 								id="playlist-description"
 								className="resize-none text-archivo w-full p-2 rounded-md bg-transparent border border-gray-light dark:border-gray-light-opacity/20 scrollbar-hide"
-								placeholder="Descripción de la playlist 🚀"
+								placeholder="Playlist description 🚀"
 								value={dataForCreatePlaylist.description}
 								onChange={(event) => {
 									const input = event.target as HTMLTextAreaElement;
@@ -162,7 +162,7 @@ export default function CreatePlaylist() {
 								</span>
 								<span className="text-white">
 									{
-										loadingStates.createPlaylistLoading || loadingStates.addSongsToPlaylistLoading ? "Añadiendo..." : "Añadir"
+										loadingStates.createPlaylistLoading || loadingStates.addSongsToPlaylistLoading ? "Adding..." : "Add"
 									}
 								</span>
 							</button>
