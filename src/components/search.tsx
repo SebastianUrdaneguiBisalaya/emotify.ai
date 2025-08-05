@@ -7,19 +7,10 @@ import { generateUUID } from "@/lib/utils";
 export default function Search() {
 	const [search, setSearch] = useState<string>("");
 	const [id, setId] = useState<string>("");
-	const [showAudioRecordIcon, setShowAudioRecordIcon] = useState<boolean>(true);
-
+	
 	useEffect(() => {
 		setId(generateUUID());
 	}, []);
-	
-	useEffect(() => {
-		if (search.length > 0) {
-			setShowAudioRecordIcon(false);
-		} else {
-			setShowAudioRecordIcon(true);
-		}
-	}, [search]);
 
 	return (
 		<div className="relative flex flex-row items-center justify-between gap-2 shadow-md shadow-green px-6 py-3 rounded-[28px] bg-white/10 border border-transparent dark:border-white backdrop-blur-sm max-w-2xl w-full min-h-fit max-h-96 h-full animate-fade-in-up duration-100">
@@ -45,18 +36,6 @@ export default function Search() {
 				/>
 			</div>
 			<div className="flex flex-row items-center gap-2">
-				{
-					showAudioRecordIcon && (
-						<button
-							className="absolute bottom-4 right-32 cursor-pointer rounded-full p-2 bg-green hover:animate-rotate-360"
-						>
-							<span className="w-fit h-fit flex items-center justify-center">
-								<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#ffffff" fillRule="evenodd" d="M9.25 21.75c-.41 0-.75-.34-.75-.75V3c0-.41.34-.75.75-.75s.75.34.75.75v18c0 .41-.34.75-.75.75m-3-4c-.41 0-.75-.34-.75-.75V7c0-.41.34-.75.75-.75S7 6.59 7 7v10c0 .41-.34.75-.75.75m5.25.25c0 .41.34.75.75.75s.75-.34.75-.75V6c0-.41-.34-.75-.75-.75s-.75.34-.75.75zm3.75-2.25c-.41 0-.75-.34-.75-.75V9c0-.41.34-.75.75-.75s.75.34.75.75v6c0 .41-.34.75-.75.75M17.5 17c0 .41.34.75.75.75s.75-.34.75-.75V7c0-.41-.34-.75-.75-.75s-.75.34-.75.75zm3.75-3.25c-.41 0-.75-.34-.75-.75v-2c0-.41.34-.75.75-.75s.75.34.75.75v2c0 .41-.34.75-.75.75M2.5 13c0 .41.34.75.75.75S4 13.41 4 13v-2c0-.41-.34-.75-.75-.75s-.75.34-.75.75z" color="#ffffff"/></svg>
-							</span>
-						</button>
-					)
-				}
-				
 				<Link
 					href={`/music/${id}?q=${encodeURIComponent(search)}`}
 					className="absolute bottom-4 right-6 cursor-pointer bg-black rounded-full px-4 py-2"

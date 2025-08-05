@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import MiniSearch from "@/components/mini-search";
 import Logo from "@/components/logo";
 import BubbleChat from "@/components/bubble-chat";
@@ -11,6 +11,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 
 export default function Music() {
 	const router = useRouter();
+	const messagesEndRef = useRef<HTMLDivElement>(null);
 	const searchParams = useSearchParams();
 	const initialQuery = searchParams.get("q");
 	
@@ -41,10 +42,9 @@ export default function Music() {
 
 	useEffect(() => {
 		if (initialQuery && initialQuery.trim() !== "" && !initialChatSent) {
-			handleSubmit();
 			setInitialChatSent(true);
 		}
-	}, [initialQuery, handleSubmit, initialChatSent]);
+	}, [initialQuery, initialChatSent]);
 
 	useEffect(() => {
 		let foundSongs: SongDetail[] = [];
@@ -67,6 +67,13 @@ export default function Music() {
 			setShowSpotifyResults(false);
 			setCurrentRecommendedSongs([]);
 		}
+	}, [messages]);
+
+	useEffect(() => {
+		const scrollToBottom = () => {
+			messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+		};
+		scrollToBottom();
 	}, [messages]);
 
 	return (
@@ -93,10 +100,11 @@ export default function Music() {
 						</div>
 					</div>
 					<div className="flex flex-col h-[calc(100vh-160px)]">
-						<div className="grow overflow-y-auto scrollbar">
+						<div className="grow overflow-y-scroll scrollbar">
 							<BubbleChat
 								data={messages}
 							/>
+							<div ref={messagesEndRef} />
 						</div>
 						<div className="w-full p-4 shrink-0">
 							<MiniSearch
@@ -131,7 +139,7 @@ export default function Music() {
 								</button>
 							</div>
 							<div className="w-full grow px-4 py-2 overflow-hidden">
-								<div className="flex flex-col gap-2 overflow-y-auto scrollbar h-[calc(100vh-177px)]">
+								<div className="flex flex-col gap-2 overflow-y-scroll scrollbar h-[calc(100vh-177px)]">
 									{
 										currentRecommendedSongs.map((song) => {
 											return (
