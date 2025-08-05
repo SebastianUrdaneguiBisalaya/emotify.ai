@@ -13,14 +13,14 @@ export default function Search() {
 	}, []);
 
 	return (
-		<div className="relative flex flex-row items-center justify-between gap-2 shadow-md shadow-green px-6 py-3 rounded-[28px] bg-white/10 border border-transparent dark:border-white backdrop-blur-sm max-w-2xl w-full min-h-fit max-h-96 h-full animate-fade-in-up duration-100">
-			<div className="flex flex-row items-center gap-2 w-full">
-				<div className="absolute top-4 left-6 w-fit h-fit flex items-center justify-center">
+		<div className="relative flex flex-col items-center justify-between gap-2 shadow-md shadow-green px-6 py-3 rounded-[28px] bg-white/10 border border-transparent dark:border-white backdrop-blur-sm max-w-2xl w-full min-h-fit max-h-96 h-full animate-fade-in-up duration-100">
+			<div className="flex flex-row justify-center items-start gap-2 w-full h-fit">
+				<div className="w-fit h-fit p-2 items-center justify-center hidden sm:flex">
 					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><g fill="none" stroke="#878787" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="m21 21l-4.34-4.34"/><circle cx="11" cy="11" r="8"/></g></svg>
 				</div>
 				<textarea
 					id="search-input"
-					className="ml-10 mr-24 font-archivo w-full focus:outline-none resize-none scrollbar-hide bg-transparent transition-all duration-200 ease-in-out"
+					className="font-archivo w-full h-fit focus:outline-none resize-none scrollbar-hide bg-transparent transition-all duration-200 ease-in-out"
 					placeholder="How do you fell or what are you going to do?"
 					value={search}
 					spellCheck={false}
@@ -35,10 +35,10 @@ export default function Search() {
 					}}
 				/>
 			</div>
-			<div className="flex flex-row items-center gap-2">
+			<div className="flex flex-row items-center justify-end gap-2 w-full">
 				<Link
 					href={`/music/${id}?q=${encodeURIComponent(search)}`}
-					className="absolute bottom-4 right-6 cursor-pointer bg-black rounded-full px-4 py-2"
+					className="cursor-pointer bg-black rounded-full px-4 py-2"
 				>
 					<span className="font-archivo text-white">
 						Generate
