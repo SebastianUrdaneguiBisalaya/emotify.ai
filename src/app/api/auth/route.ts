@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { generateRandomString } from "@/lib/utils";
+import { config } from "@/config/config";
 
 export async function GET() {
   const state = generateRandomString(16);
   const scope = "user-read-private user-read-email playlist-modify-private";
-  const redirectUri = "http://127.0.0.1:3000/api/auth/callback";
+  const redirectUri = `${config.baseUrl}/api/auth/callback`;
 
   const params = new URLSearchParams({
     response_type: "code",
