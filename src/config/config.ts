@@ -1,4 +1,4 @@
-const baseUrl = "https://emotifyai.vercel.app";
+const baseUrl = "https://emotifyai-seven.vercel.app";
 
 export const config = {
   baseUrl,
