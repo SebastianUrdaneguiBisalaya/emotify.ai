@@ -31,8 +31,8 @@ export default function Home() {
 			
 			<main className="w-full h-full flex flex-col items-center gap-8 py-4">
 				<MainTag />
-				<h1 className="font-montserrat font-bold text-center text-7xl text-black dark:text-white animate-blurred-fade-in">Discover the music that <span className="text-green">suits your mood</span></h1>
-				<h2 className="font-archivo font-normal text-gray dark:text-gray-light text-xl text-center max-w-4xl w-full animate-fade-in-up duration-75">{`Enter how you're feel or what you're doing (whether it's working, relaxing, thinking, or celebrating) and let AI choose the perfect songs for you on Spotify.`}</h2>
+				<h1 className="font-montserrat font-bold text-center text-4xl md:text-5xl lg:text-7xl text-black dark:text-white animate-blurred-fade-in">Discover the music that <span className="text-green">suits your mood</span></h1>
+				<h2 className="font-archivo font-normal text-gray dark:text-gray-light text-base md:text-xl text-center max-w-4xl w-full animate-fade-in-up duration-75">{`Enter how you're feel or what you're doing (whether it's working, relaxing, thinking, or celebrating) and let AI choose the perfect songs for you on Spotify.`}</h2>
 				<Search />
 			</main>
 
