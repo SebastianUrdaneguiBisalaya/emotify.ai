@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
+import { config } from "@/config/config";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -7,7 +8,7 @@ export async function GET(req: Request) {
   const code = searchParams.get("code");
   const state = searchParams.get("state");
 
-  const redirectUri = "http://127.0.0.1:3000/api/auth/callback";
+  const redirectUri = `${config.baseUrl}/api/auth/callback`;
   const clientId = process.env.CLIENT_ID_SPOTIFY_API as string;
   const clientSecret = process.env.SECRET_CLIENT_SPOTIFY_API as string;
 

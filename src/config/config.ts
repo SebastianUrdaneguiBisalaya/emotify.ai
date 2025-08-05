@@ -1,4 +1,4 @@
-const baseUrl = "127.0.0.1:3000";
+const baseUrl = "https://emotifyai.vercel.app";
 
 export const config = {
   baseUrl,
