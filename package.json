@@ -14,7 +14,7 @@
     "@midudev/tailwind-animations": "^0.2.0",
     "ai": "^4.3.19",
     "axios": "^1.10.0",
-    "next": "15.4.2",
+    "next": "15.4.10",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-markdown": "^10.1.0",
